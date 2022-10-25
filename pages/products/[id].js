@@ -1,21 +1,20 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-const productsList = require("../../data/data.json");
+//const productsList = require("../../data/data.json");
 import Image from 'next/image'
 
-export default function ProductPage() {
-  const router = useRouter();
-  const { id } = router.query;
-  const [product, setProduct] = useState(
-    productsList.find((product) => product.id === parseInt(id))
-  );
+import {handler} from '../../helpers/FetchData'
+
+
+export default function ProductPage({product}) {
+  //const [product, setProduct] = useState();
   // setProduct(productsList.filter(product => product.id !== id)[0])
   return (
     <>
-      <h1>Product {id}</h1>
+      <h1>Product Details</h1>
       {product && 
       <div>
-          <img src={product.image} width="400px" height="400px" alt="imagenbvwiu"/>
+          <Image src={product.image} width="400px" height="400px" alt="imagenbvwiu"/>
           <div>
             <h3>{product.title}</h3>
             <h3>{product.price}</h3>
@@ -28,4 +27,19 @@ export default function ProductPage() {
       }
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  
+  const { id } = context.query;
+  console.log(id);
+  const url = `https://fakestoreapi.com/products/${id}`;
+  // const response = await getProduct('//';
+  // const data = await response.json()
+  const product = await handler(url)
+  return {
+    props:{
+      product
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import styles from '../styles/Home.module.css'
 
 export default function About() {
   return (
@@ -10,23 +11,10 @@ export default function About() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main >
+      <main className={styles.main}>
         <h1>About the company</h1>
         <p>Listing all of the products</p>
       </main>
-
-      <footer >
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
   )
 }

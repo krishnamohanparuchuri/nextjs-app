@@ -1,11 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-const productsList = require('../../data/data.json');
+import { handler } from '../../helpers/FetchData';
+//const productsList = require('../../data/data.json');
 
 
-export default function products() {
-  console.log(productsList);
+export default function products({products}) {
+  
   return (
     <div>
       <Head>
@@ -17,7 +18,7 @@ export default function products() {
       <main>
         <h1>Products Catalog</h1>
         <p>Listing all of the products</p>
-        {productsList.map(product => (
+        {products.map(product => (
           <>
             <Link href = {`/products/${product.id}`}>
             <h3>{product.title}</h3>
@@ -27,9 +28,15 @@ export default function products() {
       ))
       }
     </main>
-    <footer>
-        <p>This is Footer</p>
-      </footer>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  const productsList = await handler('http://localhost:3000/api/products');  
+  return {
+    props:{
+      products : productsList
+    }
+  }
 }

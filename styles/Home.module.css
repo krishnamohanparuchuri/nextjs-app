@@ -107,6 +107,21 @@
   height: 1em;
   margin-left: 0.5rem;
 }
+.displayFlex{
+  display:flex;
+  justify-content: space-around;
+}
+.displayLi{
+  list-style: none;
+  margin:25px
+}
+
+.displayLi:hover{
+  font-size:18px;
+  cursor:pointer;
+  font-weight: 900;
+  border-bottom: 2px solid rgb(155, 131, 99);
+}
 
 @media (max-width: 600px) {
   .grid {
